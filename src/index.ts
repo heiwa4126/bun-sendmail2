@@ -16,6 +16,7 @@ async function main() {
 			// 任意ヘッダーはトップレベルに直接置く
 			"content-language": "ja",
 			"content-type": 'text/plain; charset="UTF-8"',
+			"content-transfer-encoding": "base64",
 			subject: "日本語の件名テスト",
 			text: `このメールは日本語で作成したテストメールです。
 本文は日本語のみでテキストで記載しています。

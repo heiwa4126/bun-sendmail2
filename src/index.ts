@@ -1,32 +1,35 @@
-import nodemailer from "nodemailer";
+import { SMTPClient } from "emailjs";
 
-const transporter = nodemailer.createTransport({
+const client = new SMTPClient({
 	host: "127.0.0.1",
 	port: 8825,
-	secure: false, // STARTTLSなし・平文接続
-	ignoreTLS: true // TLSネゴシエーションを試みない(ローカルテスト用途向け)
-	// auth不要なら未指定でOK
+	ssl: false,
+	tls: false // STARTTLS ネゴシエーションを試みない(ローカルテスト用途向け)
 });
 
 async function main() {
-	const info = await transporter.sendMail({
-		from: '"ポストマスター" <mxsa@360x180.net>',
-		to: '"いつものMxsaさん" <mxsa@360x180.net>',
-		cc: '"Gmailのheiwaさん" <heiwa4126@gmail.com>',
-		headers: {
-			"Content-Language": "ja",
-			"Content-Type": 'text/plain; charset="UTF-8"'
-		},
-		subject: "日本語の件名テスト", // 自動でRFC2047エンコードされる
-		text: `このメールは日本語で作成したテストメールです。
+	try {
+		const message = await client.sendAsync({
+			from: ["ポストマスター <mxsa@360x180.net>"],
+			to: ["いつものMxsaさん <mxsa@360x180.net>"],
+			cc: ["Gmailのheiwaさん <heiwa4126@gmail.com>"],
+			// 任意ヘッダーはトップレベルに直接置く
+			"content-language": "ja",
+			"content-type": 'text/plain; charset="UTF-8"',
+			subject: "日本語の件名テスト",
+			text: `このメールは日本語で作成したテストメールです。
 本文は日本語のみでテキストで記載しています。
 HTMLのタグが入っていても絶対にHTMLとして解釈しないこと。
 <strong>ここはテスト。</strong>
 ご確認をお願いします。`
-		// html: "<p>HTML本文も可能</p>",
-	});
+		});
 
-	console.log("Message sent:", info.messageId);
+		console.log("Email sent successfully:", message);
+	} catch (err) {
+		console.error("Failed to send email:", err);
+	} finally {
+		client.smtp.close(); // Don't forget to close the connection!
+	}
 }
 
 main().catch(console.error);

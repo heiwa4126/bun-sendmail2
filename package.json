@@ -1,17 +1,18 @@
 {
-	"name": "bun-sendmail1",
+	"name": "bun-sendmail2",
 	"version": "0.1.0",
 	"scripts": {
 		"test": "bun test test/*.test.ts",
+		"ex1": "bun src/index.ts",
 		"format": "oxfmt",
 		"lint": "oxlint",
+		"lint-tsc": "tsc --noEmit",
 		"check": "oxfmt && oxlint --fix"
 	},
 	"dependencies": {
-		"nodemailer": "^9.0.3"
+		"emailjs": "^5.0.2"
 	},
 	"devDependencies": {
-		"@types/nodemailer": "^8.0.1",
-		"bun-types": "^1.3.14"
+		"@types/bun": "^1.3.14"
 	}
 }

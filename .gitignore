@@ -21,3 +21,8 @@ tmp/
 !.env.example
 
 *.tsbuildinfo
+
+node_modules/
+var/
+
+dist/

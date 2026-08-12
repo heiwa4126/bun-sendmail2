@@ -15,3 +15,15 @@ node で mail を送るテスト。
 bun ci
 bun run ex1
 ```
+
+## バンドルサイズ
+
+```console
+$ bun run build
+$ bun build ./src/index.ts --outfile ./dist/index.js --minify --target node
+Bundled 10 modules in 126ms
+
+  index.js  23.43 KB  (entry point)
+```
+
+nodemailer の 1/10 ぐらい。

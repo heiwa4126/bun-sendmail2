@@ -4,6 +4,11 @@
 	"scripts": {
 		"test": "bun test test/*.test.ts",
 		"ex1": "bun src/index.ts",
+		"build": "bun build ./src/index.ts --outfile ./dist/index.js --minify --target node",
+		"build-es:1": "esbuild ./src/index.ts --bundle --format=esm --target=esnext --platform=node --outfile=./tmp/index.js --external:bun:ffi",
+		"build-es:2": "bun build ./tmp/index.js --outfile ./dist/index.js --minify --target node",
+		"build-es": "bun run --sequential build-es:1 build-es:2",
+		"ex2": "bun dist/index.js",
 		"format": "oxfmt",
 		"lint": "oxlint",
 		"lint-tsc": "tsc --noEmit",

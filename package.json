@@ -15,9 +15,9 @@
 		"check": "oxfmt && oxlint --fix"
 	},
 	"dependencies": {
-		"emailjs": "^5.0.2"
+		"emailjs": "^5.0.3"
 	},
 	"devDependencies": {
-		"@types/bun": "^1.4.0"
+		"@types/bun": "^1.4.2"
 	}
 }
